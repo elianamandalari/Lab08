@@ -7,6 +7,7 @@ package it.polito.tdp.borders;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.borders.model.Country;
 import it.polito.tdp.borders.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,8 +32,23 @@ public class BordersController {
 
 	@FXML
 	void doCalcolaConfini(ActionEvent event) {
-
-		txtResult.setText("Todo!");
+       if(Integer.parseInt(txtAnno.getText())>1816 && Integer.parseInt(txtAnno.getText())<2016)
+         {
+    	   for(Country c: model.createGraphs(Integer.parseInt(txtAnno.getText()))){
+    		   for(Country country:model.getStati())
+    		   {
+    			   if (c.getNumero()==country.getNumero())
+    				   txtResult.appendText(country.getNomeCompleto()+ "    Numero stati confinanti: "+model.numeroConfini(c)+"\n" );
+    		   }
+    	   }
+    	   
+         }
+       }
+		
+	
+	
+	public void setModel(Model model){
+		this.model=model;
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
